@@ -1,4 +1,6 @@
 import {useState} from 'react'
+import {moneyFormat} from '../helpers'
+import './productstyle.css'
 
 function Product({product,total, money, basket, setBasket}) {
 
@@ -33,24 +35,14 @@ function Product({product,total, money, basket, setBasket}) {
   return (
     <>
         <div className="product">
+          <img src={product.image} alt="" />
            <h6>{product.title}</h6>
-           <div className="price">$ {product.price}</div>
+           <div className="price">$ {moneyFormat(product.price)}</div>
            <div className="actions">
-            <button disabled={!basketItem} onClick={removeBasket}>Sat</button>
+            <button className='sell-btn' disabled={!basketItem} onClick={removeBasket}>Sat</button>
             <span className='amount'>{basketItem && basketItem.amount || 0}</span>
-            <button disabled={total + product.price > money} onClick={addBasket}>Satın Al</button>
+            <button className='buy-btn' disabled={total + product.price > money} onClick={addBasket}>Satın Al</button>
            </div>
-
-           <style>
-              {`
-                .product{
-                  padding: 10px;
-                  background: #fff;
-                  border: 1px solid #ddd;
-                  margin-bottom: 20px;
-                }
-              `}
-           </style>
         </div>
     </>
   )
